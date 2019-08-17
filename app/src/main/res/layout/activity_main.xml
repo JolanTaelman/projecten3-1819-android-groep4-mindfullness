@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
     tools:context=".activities.MainActivity"
     android:background="@mipmap/trianglify_01"
     android:layout_height="match_parent"
@@ -10,7 +10,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:theme="@style/AppTheme.AppBarOverlay"/>
@@ -267,4 +267,4 @@
         android:layout_width="match_parent"
         android:id="@+id/fragment_holder_main"> </FrameLayout>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

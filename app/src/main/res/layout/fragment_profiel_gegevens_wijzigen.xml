@@ -42,18 +42,18 @@
             android:layout_weight="1"
             app:srcCompat="@drawable/ic_person_black_24dp" />
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="228dp"
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtGebruikersnaam"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Gebruikersnaam" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
     <TextView
@@ -83,17 +83,17 @@
             android:layout_weight="1"
             app:srcCompat="@drawable/ic_landscape_black_24dp" />
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="228dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtRegio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Regio" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -111,18 +111,18 @@
             android:layout_weight="1"
             app:srcCompat="@drawable/ic_phone_android_black_24dp" />
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="228dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtTelnr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Telefoonnummer"
                 android:phoneNumber="true" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 

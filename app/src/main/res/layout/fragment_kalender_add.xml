@@ -6,7 +6,7 @@
     android:id="@+id/frameLayoutKalenderAdd"
     android:background="@mipmap/trianglify_01">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_task_add"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
@@ -52,7 +52,7 @@
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_done"/>
         </LinearLayout>
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

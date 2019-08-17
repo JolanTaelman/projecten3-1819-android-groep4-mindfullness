@@ -1,9 +1,9 @@
 package com.groep4.mindfulness.adapters
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
 import com.groep4.mindfulness.fragments.FragmentSessiePageInfo
 import com.groep4.mindfulness.fragments.FragmentSessiePageOefeningen
 import com.groep4.mindfulness.model.Sessie

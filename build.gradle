@@ -26,9 +26,4 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-// Niet weg doen aub, dit is voor de pipeline errors
-buildScan { 
-    termsOfServiceUrl = 'https://gradle.com/terms-of-service'
-    termsOfServiceAgree = 'yes' 
-}
 

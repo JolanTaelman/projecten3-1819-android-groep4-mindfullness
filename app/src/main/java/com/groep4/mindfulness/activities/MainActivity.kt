@@ -2,15 +2,16 @@ package com.groep4.mindfulness.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Source
 import com.groep4.mindfulness.R
 import com.groep4.mindfulness.fragments.*
 import com.groep4.mindfulness.interfaces.CallbackInterface
@@ -32,6 +33,8 @@ class MainActivity : AppCompatActivity(), CallbackInterface {
     private val BACK_STACK_ROOT_TAG = "root_fragment"
     private val client = OkHttpClient()
     lateinit var mAuth: FirebaseAuth
+    lateinit var db: FirebaseFirestore
+
     var gebruiker : Gebruiker = Gebruiker()
     var sessies: ArrayList<Sessie> = ArrayList()
 
@@ -40,6 +43,7 @@ class MainActivity : AppCompatActivity(), CallbackInterface {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mAuth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
         Logger.addLogAdapter(AndroidLogAdapter())
 
         // Set gebruiker
@@ -91,6 +95,7 @@ class MainActivity : AppCompatActivity(), CallbackInterface {
     fun getSessiesFromDB(): ArrayList<Sessie> {
         val tempSessies: ArrayList<Sessie> = ArrayList()
 
+        // TODO: SESSIES IN BACKEND
         // HTTP Request sessies
         val request = Request.Builder()
                 .url("http://141.134.155.219:3000/sessies")
@@ -119,14 +124,34 @@ class MainActivity : AppCompatActivity(), CallbackInterface {
         return tempSessies
     }
 
+
     /**
      * Aangemelde gebruiker ophalen
+     *
+     *
      */
     fun getAangemeldeGebruiker() : Gebruiker{
-        val gebruiker : Gebruiker = Gebruiker()
+        var gebruiker : Gebruiker = Gebruiker()
         val id = mAuth.currentUser!!.uid
+        val source = Source.CACHE
+
+        val docRef = db.collection("Gebruiker").document(id)
+
+        docRef.get(source).addOnSuccessListener { documentSnapshot ->
+            val ontvangenGebruiker = documentSnapshot.toObject(Gebruiker::class.java)
+            gebruiker.uid = documentSnapshot.id
+            gebruiker.regio = ontvangenGebruiker!!.regio
+            gebruiker.email = ontvangenGebruiker.email
+            gebruiker.name = ontvangenGebruiker.name
+            gebruiker.telnr = ontvangenGebruiker.telnr
+            gebruiker.groepsnr = ontvangenGebruiker.groepsnr
+            gebruiker.sessieId = ontvangenGebruiker.sessieId
+        }
+        return gebruiker
+
+/*
         val string1 = ("http://141.134.155.219:3000/users/" + id)
-        val string = "http://141.134.155.219:3000/users/yXQmL8IGSCbN15fzWw60t5udU2o2"
+        //val string = "http://141.134.155.219:3000/users/yXQmL8IGSCbN15fzWw60t5udU2o2"
 
         // HTTP Request sessies
         val request = Request.Builder()
@@ -151,6 +176,7 @@ class MainActivity : AppCompatActivity(), CallbackInterface {
             }
         })
         return gebruiker
+        */
     }
 
     /**
@@ -159,37 +185,60 @@ class MainActivity : AppCompatActivity(), CallbackInterface {
     fun getOefeningen(sessieId: Int): ArrayList<Oefening>{
         val oefeningen: ArrayList<Oefening> = ArrayList()
 
-        // HTTP Request oefeningen
-        val request = Request.Builder()
-                /*.header("Authorization", "token abcd")*/
-                .url("http://141.134.155.219:3000/oefeningen/$sessieId")
-                .build()
+        val source = Source.CACHE
 
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                Log.e("ERROR", "HTTP request failed: $e")
-            }
+        val docRef = db.collection("Oefening")
 
-            override fun onResponse(call: Call, response: Response) {
-                val jsonarray = JSONArray(response.body()!!.string())
-                for (i in 0 until jsonarray.length()) {
-                    val jsonobject = jsonarray.getJSONObject(i)
-                    val oefeningenId = jsonobject.getInt("oefeningId")
-                    val naam = jsonobject.getString("naam")
-                    val beschrijving = jsonobject.getString("beschrijving")
-                    val sessieid = jsonobject.getInt("sessieId")
-                    val fileUrl = jsonobject.getString("fileName")
-                    val fileMimeType = jsonobject.getString("fileMimetype")
-                    val groepen = jsonobject.getString("groepen")
+        docRef.get(source).addOnSuccessListener { documentSnapshot ->
+            //val oefeningenLijst = documentSnapshot.toObjects(Oefening::class.java)
+            // oefeningen.addAll(oefeningenLijst)
 
-                    if(groepen.contains(gebruiker!!.groepsnr.toString())) {
-                        val oefening: Oefening = Oefening(oefeningenId, naam, beschrijving, sessieid, fileUrl, fileMimeType, groepen)
-                        oefeningen.add(oefening)
-                    }
-                }
-            }
-        })
+            for (document in documentSnapshot){
+                oefeningen.add(Oefening(
+                        Integer.parseInt(document.id),
+                        document.data.getValue("naam") as String,
+                        document.data.getValue("beschrijving") as String,
+                        document.data.getValue("sId") as Int,
+                        document.data.getValue("url") as String,
+                        document.data.getValue("mimeType") as String,
+                        document.data.getValue("groepen") as String))
+             }
+        }
         return oefeningen
+
+        /*  // HTTP Request oefeningen
+          val request = Request.Builder()
+                  /*.header("Authorization", "token abcd")*/
+                  .url("http://141.134.155.219:3000/oefeningen/$sessieId")
+                  .build()
+
+          client.newCall(request).enqueue(object : Callback {
+              override fun onFailure(call: Call, e: IOException) {
+                  Log.e("ERROR", "HTTP request failed: $e")
+              }
+
+              override fun onResponse(call: Call, response: Response) {
+                  val jsonarray = JSONArray(response.body()!!.string())
+                  for (i in 0 until jsonarray.length()) {
+                      val jsonobject = jsonarray.getJSONObject(i)
+                      val oefeningenId = jsonobject.getInt("oefeningId")
+                      val naam = jsonobject.getString("naam")
+                      val beschrijving = jsonobject.getString("beschrijving")
+                      val sessieid = jsonobject.getInt("sessieId")
+                      val fileUrl = jsonobject.getString("fileName")
+                      val fileMimeType = jsonobject.getString("fileMimetype")
+                      val groepen = jsonobject.getString("groepen")
+
+                      if(groepen.contains(gebruiker!!.groepsnr.toString())) {
+                          val oefening: Oefening = Oefening(oefeningenId, naam, beschrijving, sessieid, fileUrl, fileMimeType, groepen)
+                          oefeningen.add(oefening)
+                      }
+                  }
+              }
+          })
+          */
+
+       // return oefeningen
     }
 
     /**
@@ -210,6 +259,7 @@ class MainActivity : AppCompatActivity(), CallbackInterface {
 
     /**
      * gegevens van de gebruiker opslaan
+     * TODO: Deze is bekijken
      */
     fun gegevensGebruikerOpslaan(body : FormBody, url : String) : String {
         var response2 : String? = null
@@ -224,6 +274,28 @@ class MainActivity : AppCompatActivity(), CallbackInterface {
         getAangemeldeGebruiker()
         return response2.orEmpty()
     }
+
+    fun gegevensGebruikerOpslaan2(gebruiker : Gebruiker) : String {
+        var response2 : String? = null
+
+
+        val docRef = db.collection("Gebruiker").document(gebruiker.uid.toString())
+
+        val gebruikerMap = hashMapOf(
+                "email" to gebruiker.email,
+                "telnr" to gebruiker.telnr,
+                "name" to gebruiker.name,
+                "regio" to gebruiker.regio,
+                "groepsnr" to gebruiker.groepsnr,
+                "sessieId" to gebruiker.sessieId
+                )
+
+        docRef.set(gebruikerMap)
+        getAangemeldeGebruiker()
+        return response2.orEmpty()
+    }
+
+
 
     /**
      * Opent menu om naar FragmentProfiel te gaan of uit te loggen
@@ -289,7 +361,8 @@ class MainActivity : AppCompatActivity(), CallbackInterface {
      */
     fun sessieUnlocked() {
         gebruiker!!.sessieId += 1
-        val fromBodyBuilder = FormBody.Builder()
+
+      /*  val fromBodyBuilder = FormBody.Builder()
         fromBodyBuilder.add("name", gebruiker!!.name)
         fromBodyBuilder.add("regio", gebruiker!!.regio)
         fromBodyBuilder.add("telnr", gebruiker!!.telnr)
@@ -297,7 +370,7 @@ class MainActivity : AppCompatActivity(), CallbackInterface {
         fromBodyBuilder.add("email", gebruiker!!.email)
         fromBodyBuilder.add("groepnr", gebruiker!!.groepsnr.toString())
         fromBodyBuilder.add("sessieid", gebruiker!!.sessieId.toString())
-        var url = "http://141.134.155.219:3000/users/" + gebruiker!!.uid
-        gegevensGebruikerOpslaan(fromBodyBuilder.build(), url)
+        var url = "http://141.134.155.219:3000/users/" + gebruiker!!.uid*/
+        gegevensGebruikerOpslaan2(gebruiker)
     }
 }

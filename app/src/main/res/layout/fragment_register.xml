@@ -16,7 +16,7 @@
         android:layout_below="@+id/tv_mindfulness"
         android:orientation="vertical">
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -37,8 +37,8 @@
                 android:paddingRight="20dp"
                 android:singleLine="true"
                 android:textSize="18sp" />
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             app:passwordToggleEnabled="true"
@@ -65,8 +65,8 @@
                 android:paddingRight="20dp"
                 android:textSize="18sp" />
 
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/register_name_textlayout"
@@ -97,7 +97,7 @@
 
                 />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
     <Button
         android:id="@+id/email_register_in_button"

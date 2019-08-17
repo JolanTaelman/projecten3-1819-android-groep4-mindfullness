@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <android.support.v7.widget.GridLayout
+                <androidx.gridlayout.widget.GridLayout
                     android:id="@+id/grid_miscbg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -76,9 +76,9 @@
                         app:layout_gravity="bottom"
                         app:srcCompat="@mipmap/bush01" />
 
-                </android.support.v7.widget.GridLayout>
+                </androidx.gridlayout.widget.GridLayout>
 
-                <android.support.v7.widget.GridLayout
+                <androidx.gridlayout.widget.GridLayout
                     android:id="@+id/grid_buildings"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -121,9 +121,9 @@
                         app:layout_gravity="bottom"
                         app:srcCompat="@mipmap/finish" />
 
-                </android.support.v7.widget.GridLayout>
+                </androidx.gridlayout.widget.GridLayout>
 
-                <android.support.v7.widget.GridLayout
+                <androidx.gridlayout.widget.GridLayout
                     android:id="@+id/grid_miscfg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -186,7 +186,7 @@
                         app:layout_gravity="bottom"
                         app:srcCompat="@mipmap/light00" />
 
-                </android.support.v7.widget.GridLayout>
+                </androidx.gridlayout.widget.GridLayout>
 
             </FrameLayout>
 
@@ -220,7 +220,7 @@
 
         </LinearLayout>
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/cv_sessie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -256,7 +256,7 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
         <FrameLayout
             android:layout_width="wrap_content"
@@ -306,7 +306,7 @@
             android:visibility="invisible"
             app:srcCompat="@mipmap/bus" />
 
-        <android.support.v7.widget.GridLayout
+        <androidx.gridlayout.widget.GridLayout
             android:id="@+id/gl_bus_passengers"
             android:layout_width="205dp"
             android:layout_height="101dp"
@@ -403,7 +403,7 @@
                 app:layout_column="3"
                 app:layout_row="1"
                 app:srcCompat="@mipmap/mnstr2" />
-        </android.support.v7.widget.GridLayout>
+        </androidx.gridlayout.widget.GridLayout>
 
         <ImageView
             android:id="@+id/iv_bus_gloss"

@@ -8,10 +8,10 @@ import android.widget.TextView
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.annotation.TargetApi
+import android.content.ContentValues.TAG
 import android.content.Intent
-import android.support.constraint.Constraints.TAG
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
+import com.google.android.material.snackbar.Snackbar
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -10,9 +10,9 @@ import com.groep4.mindfulness.services.NotificationService
 import android.app.NotificationManager
 import android.app.NotificationChannel
 import android.graphics.Color
-import android.support.annotation.RequiresApi
-import android.support.v4.app.NotificationCompat
-import android.support.v4.app.NotificationCompat.PRIORITY_MIN
+import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationCompat.PRIORITY_MIN
 import com.groep4.mindfulness.R
 
 
