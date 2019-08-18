@@ -37,34 +37,16 @@ class FragmentOefeningFeedback : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         var oefening = arguments!!.getParcelable<Oefening>("oefening")
-        val mainActivity = activity as MainActivity
 
         buttonOpslaan!!.setOnClickListener {
-            val serverURL: String = "http://141.134.155.219:3000/oefeningen/oef/" + oefening.oefenigenId + "/feedback"
-            val url = URL(serverURL)
-
-                val builder = Request.Builder().url(url)
-
-                val sb = StringBuilder()
-                sb.append("oefeningId=" + oefening.oefenigenId)
-                        .append("&&")
-                        .append("beschrijving="+txtFeedback!!.text)
-                        .append("&&")
-                        .append("score=" + ratingFeedback)
-
-                val fromBodyBuilder = FormBody.Builder()
-                fromBodyBuilder.add("oefeningId", oefening.oefenigenId.toString())
-                fromBodyBuilder.add("beschrijving", txtFeedback!!.text.toString())
-                fromBodyBuilder.add("score", ratingFeedback.toString())
-
-                var response = (activity as MainActivity)
-                        .postFeedback("http://141.134.155.219:3000/oefeningen/oef/" + oefening.oefenigenId + "/feedback", fromBodyBuilder.build())
-
-
+                val beschrijving = txtFeedback!!.text.toString()
+                val score = ratingFeedback.toString()
+                val response = (activity as MainActivity)
+                        .postFeedback(oefening,beschrijving, score )
+            Toast.makeText(activity, response, Toast.LENGTH_SHORT)
                 txtOefeningNaam!!.text = response
             (activity as MainActivity).onBackPressed()
             }
-
 
             ratingBar!!.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
                 ratingFeedback = (rating * 2).toInt()

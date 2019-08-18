@@ -78,20 +78,11 @@ class FragmentProfielGegevensWijzigen : Fragment() {
 
             // Als er geen fouten zijn, feedback verzenden
             if(!fout!!) {
-                (activity as MainActivity)!!
+                (activity as MainActivity)
                         .veranderGegevensGebruiker(txtGebruikersnaam!!.text.toString(),
                                 txtRegio!!.text.toString(), txtTelnr!!.text.toString())
 
-                val fromBodyBuilder = FormBody.Builder()
-                fromBodyBuilder.add("name", txtGebruikersnaam!!.text.toString())
-                fromBodyBuilder.add("regio", txtRegio!!.text.toString())
-                fromBodyBuilder.add("telnr", txtTelnr!!.text.toString())
-                fromBodyBuilder.add("uid", gebruiker!!.uid)
-                fromBodyBuilder.add("email", gebruiker!!.email)
-                fromBodyBuilder.add("groepnr", gebruiker!!.groepsnr.toString())
-                fromBodyBuilder.add("sessieid", gebruiker!!.sessieId.toString())
-                var url = "http://141.134.155.219:3000/users/" + gebruiker!!.uid
-                (activity as MainActivity)!!.gegevensGebruikerOpslaan(fromBodyBuilder.build(), url)
+                (activity as MainActivity).gegevensGebruikerOpslaan()
                 activity!!.onBackPressed()
             }
         }

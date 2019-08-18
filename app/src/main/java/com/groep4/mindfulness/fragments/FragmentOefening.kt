@@ -71,7 +71,9 @@ class FragmentOefening : Fragment() {
         if (oefening.fileMimeType == "application/pdf"){
             wvPDF!!.visibility = View.VISIBLE
             wvPDF!!.settings.javaScriptEnabled = true
-            wvPDF!!.loadUrl("https://docs.google.com/gview?embedded=true&url=http://141.134.155.219:3000/oefeningen/files/" + oefening.fileUrl)
+           val url = "https://docs.google.com/gview?embedded=true&url=" + oefening.fileUrl
+           wvPDF!!.loadUrl(url)
+
         }
 
         // Toont afbeelding als oefening jpgbestand is
@@ -80,18 +82,18 @@ class FragmentOefening : Fragment() {
 
 
             Ion.with(ivOefening)
-                    .load("http://141.134.155.219:3000/oefeningen/files/" + oefening.fileUrl)
+                    .load( oefening.fileUrl)
 
             ivOefening!!.setOnClickListener{
                 val i = Intent(android.content.Intent.ACTION_VIEW)
-                i.setDataAndType(Uri.parse("http://141.134.155.219:3000/oefeningen/files/" + oefening.fileUrl), "image/jpg")
+                i.setDataAndType(Uri.parse(oefening.fileUrl), "image/jpg")
                 startActivity(i)
             }
         }
 
         // Toont afspeelknop als oefening audiobestand is
         if (oefening.fileMimeType.startsWith("audio")){
-            mp.setDataSource("http://141.134.155.219:3000/oefeningen/files/" + oefening.fileUrl)
+            mp.setDataSource(oefening.fileUrl)
 
 
             ibAudio!!.visibility = View.VISIBLE
@@ -99,7 +101,13 @@ class FragmentOefening : Fragment() {
                 isPlaying = if (!isPlaying){
                     ibAudio!!.setImageResource(R.drawable.ic_pause_white_24dp)
                     mp.prepare()
+                    //mp.prepareAsync()
                     mp.start()
+                    mp.setOnCompletionListener {
+                        ibAudio!!.setImageResource(R.drawable.ic_play_arrow_white_24dp)
+                        mp.stop()
+                        isPlaying = false
+                    }
                     true
                 }else{
                     ibAudio!!.setImageResource(R.drawable.ic_play_arrow_white_24dp)
@@ -116,7 +124,7 @@ class FragmentOefening : Fragment() {
             controller.setMediaPlayer(videoView)
             videoView!!.setMediaController(controller)
             videoView!!.visibility = View.VISIBLE
-            videoView!!.setVideoPath("http://141.134.155.219:3000/oefeningen/files/" + oefening.fileUrl)
+            videoView!!.setVideoPath(oefening.fileUrl)
             videoView!!.setOnPreparedListener {
                 controller.setAnchorView(videoView)
             }

@@ -27,6 +27,7 @@ import java.util.ArrayList
 import java.util.HashMap
 import android.content.DialogInterface
 import android.os.Build
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.database.*
 import com.groep4.mindfulness.activities.MainActivity
@@ -137,12 +138,9 @@ class FragmentKalender : Fragment()
 
         override fun onPreExecute() {
             super.onPreExecute()
-
             todayList.clear()
             tomorrowList.clear()
             upcomingList.clear()
-
-
         }
 
         override fun doInBackground(vararg args: String): String {

@@ -4,6 +4,7 @@ package com.groep4.mindfulness.fragments
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
 import android.view.LayoutInflater
@@ -35,12 +36,9 @@ class FragmentChat : Fragment(){
     //Firebase objecten
     private var adapter: FirebaseListAdapter<Message>? = null
     private var dbInstance : DatabaseReference? = FirebaseDatabase.getInstance().reference.child("Chat")
-    private var currentUserId: FirebaseUser? = FirebaseAuth.getInstance().currentUser!!
+    private lateinit var currentUserId: FirebaseUser
 
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
-        super.onCreate(savedInstanceState)
-    }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_chat, container, false)
@@ -48,6 +46,8 @@ class FragmentChat : Fragment(){
         // Top bar info instellen
         view.tr_page.setBackgroundColor(ContextCompat.getColor(context!!, R.color.colorGreen))
         view.tv_page.setText(R.string.contact)
+
+        currentUserId = FirebaseAuth.getInstance().currentUser!!
 
         view.contactUser.text = "Psycholoog"
 
@@ -61,9 +61,13 @@ class FragmentChat : Fragment(){
                             FirebaseAuth.getInstance().currentUser!!.displayName!!))
             editText!!.setText("")
         }
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         displayChatMessages(view)
 
-        return view
     }
 
     override fun onStart() {
@@ -85,12 +89,13 @@ class FragmentChat : Fragment(){
 
         val options: FirebaseListOptions<Message> = FirebaseListOptions.Builder<Message>()
                 .setLayout(R.layout.message)
-                .setQuery(dbInstance!!.child(currentUserId!!.uid), Message::class.java)
+                .setQuery(dbInstance!!.child(currentUserId.uid), Message::class.java)
                 .setLifecycleOwner(this)
                 .build()
 
 
         adapter = object : FirebaseListAdapter<Message>(options) {
+
             override fun populateView(v: View, model: Message, position: Int) {
                 val messageText = v.findViewById(R.id.message_text) as TextView
                 val messageUser = v.findViewById(R.id.message_user) as TextView
@@ -98,10 +103,12 @@ class FragmentChat : Fragment(){
 
                 val messageBackground = v.findViewById(R.id.message_background) as RelativeLayout
                 messageBackground.setBackgroundColor(Color.WHITE)
+
+
                 /**
                  * Als het bericht in de db niet matcht met de huidige gebruiker, zet de achtergrond blauw.
                  * */
-                if(model.messageUser != currentUserId!!.displayName!!){
+                if(model.messageUser != currentUserId.displayName){
                     messageBackground.setBackgroundColor(Color.parseColor("#9BBBD8"))
                 }
 

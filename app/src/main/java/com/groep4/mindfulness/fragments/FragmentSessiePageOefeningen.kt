@@ -81,6 +81,8 @@ class FragmentSessiePageOefeningen : Fragment() {
                 val oefFragment : FragmentOefening = pagerAdapter.getRegisteredFragment(pos) as FragmentOefening
                 if (oefFragment.mp.isPlaying) {
                     oefFragment.mp.pause()
+                    oefFragment.mp.stop()
+                    oefFragment.mp.release()
                 }
             }
 

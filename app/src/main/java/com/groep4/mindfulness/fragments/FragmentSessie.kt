@@ -84,7 +84,6 @@ class FragmentSessie : Fragment() {
         imgViewsBuildings = ArrayList()
         imgViewsBuildings!!.add(view.findViewById(R.id.iv_sessie_building00))
         imgViewsBuildings!!.add(view.findViewById(R.id.iv_sessie_building01))
-       // imgViewsBuildings!!.add(view.findViewById(R.id.iv_sessie_building02))
 
         imgViewsMisc = ArrayList()
         imgViewsMisc!!.add(view.findViewById(R.id.iv_sessie_miscbg00))
