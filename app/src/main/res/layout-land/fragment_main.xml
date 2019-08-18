@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/trianglify_01"
+    tools:context=".activities.MainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:layout_constraintTop_toTopOf="@+id/fragment_holder_main">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/AppTheme"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimaryDark"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="top|center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="@string/logo"
+                android:scaleType="fitCenter"
+                app:srcCompat="@mipmap/logo" />
+
+            <com.groep4.mindfulness.views.LogoTextView
+                android:id="@+id/tv_mindfulness"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:shadowColor="@color/text_shadow"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:text="@string/app_name"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="45sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_quote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:autoSizeTextType="uniform"
+            android:background="@color/colorFacebook"
+            android:gravity="center"
+            android:padding="5dp"
+            android:shadowColor="@color/text_shadow"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+            android:text=""
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0"
+            android:gravity="center_horizontal">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal">
+
+                <!-- (android:background) Custom Selector gebruikt om verschillende states van de imagebuttons waar te kunnen nemen (kleurschakelingen)-->
+                <!-- Button Sessies -->
+                <LinearLayout
+                    android:id="@+id/ll_sessies"
+                    android:layout_width="135dp"
+                    android:layout_height="135dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/selector_btn_sessies"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/ib_sessies"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:contentDescription="@string/sessies"
+                        android:longClickable="false"
+                        android:padding="10dp"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/sessies"
+                        android:tint="@android:color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/sessies"
+                        android:textColor="@android:color/white"
+                        android:textSize="25sp" />
+                </LinearLayout>
+
+                <!-- Button Kalender -->
+                <LinearLayout
+                    android:id="@+id/ll_kalender"
+                    android:layout_width="135dp"
+                    android:layout_height="135dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/selector_btn_kalender"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/ib_kalender"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:contentDescription="@string/kalender"
+                        android:longClickable="false"
+                        android:padding="10dp"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/kalender"
+                        android:tint="@android:color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/kalender"
+                        android:textColor="@android:color/white"
+                        android:textSize="25sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/ll_reminder"
+                    android:layout_width="135dp"
+                    android:layout_height="135dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/selector_btn_reminders"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/ib_reminders"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:contentDescription="@string/reminder"
+                        android:longClickable="false"
+                        android:padding="10dp"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/reminders"
+                        android:tint="@android:color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/reminder"
+                        android:textColor="@android:color/white"
+                        android:textSize="25sp" />
+                </LinearLayout>
+
+                <!-- Button Contact -->
+                <LinearLayout
+                    android:id="@+id/ll_contact"
+                    android:layout_width="135dp"
+                    android:layout_height="135dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/selector_btn_contact"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/ib_contact"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:contentDescription="@string/contact"
+                        android:longClickable="false"
+                        android:padding="10dp"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/contact"
+                        android:tint="@android:color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/contact"
+                        android:textColor="@android:color/white"
+                        android:textSize="25sp" />
+                </LinearLayout>
+            </TableRow>
+
+
+        </TableLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_holder_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/trianglify_01"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/textViewNaam"
+        android:layout_width="385dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:text="Oefening 1"
+        android:textColor="@color/text_shadow"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewTekstFeedback"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewTekstFeedback"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginTop="16dp"
+        android:text="Wat vond u van deze oefening?"
+        app:layout_constraintBottom_toTopOf="@+id/ratingBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNaam" />
+
+    <Button
+        android:id="@+id/buttonBevestigen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/buttonstyle"
+        android:padding="10dp"
+        android:text="Bevestigen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtFeedback2" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtFeedback2"
+        android:layout_width="342dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonBevestigen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtFeedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Typ hier uw mening" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtFeedback2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTekstFeedback" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     tools:context=".activities.MainActivity"
     android:background="@mipmap/trianglify_01"
     android:layout_height="match_parent"
@@ -14,14 +14,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/fragment_holder_main" />
 
 
     <FrameLayout
         android:id="@+id/fragment_holder_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-16dp"></FrameLayout>
+        android:layout_height="match_parent"></FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
