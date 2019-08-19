@@ -1,10 +1,10 @@
-#Veranderingen 2e zit
-*Buildscan weggewerkt
-*Backend naar firebase omgezet
-*layouts aangepast voor landscape
+# Veranderingen 2e zit
+* Buildscan weggewerkt
+* Backend naar firebase omgezet
+* layouts aangepast voor landscape
 
-#Test Account
-username: az@er.ty
+# Test Account
+username: az@er.ty  
 password: Azertyuiop1
 
 # Projecten III - Mindfulness - Android application
